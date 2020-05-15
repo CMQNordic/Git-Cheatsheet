@@ -154,14 +154,14 @@ _Good Git tutorials can be found [here](https://www.youtube.com/watch?v=uR6G2v_W
 
 Some common and very useful git commands tp know. Note that in VSCode you can open 'Command palette' (`CTRL-SHIFT-P`) where you can run git commands by choosing from a list instead of typing them into the terminal window.
 
- - [Help commands](#help-commands) - _get information about commands_
- - [Initial configuration](#configuration-commands) - _configure your git first of all_
- - [Info & Status commands](#info-status-commands) - _get status and information_
+ - [Help commands](#help-commands) - _git & command help_
+ - [Info & Status](#info-status-commands) - _get status & system info_
+ - [Initial configuration](#configuration-commands) - _configure your git_
  - [Copy external repo](#clone-external-repo) - _copy remote repo as our own_
- - [Create a new repo](#create-new-repo-commands) - _create a local repo_
- - [Create a new branch](#create-new-branch-commands) - _create a new branch_
- - [Check-out a branch or filename](#check-out-branch-commands) _checking out a branch or file_
- - [SYNCHRONIZE WITH REMOTE](#synchronize-with-remote-command) ◦ <br>
+ - [Create new repo](#create-new-repo-commands) - _create a local repo_
+ - [Create new branch](#create-new-branch-commands) - _create a new branch_
+ - [Check-out](#check-out-branch-commands) - _checking out a branch or file_
+ - [Remote connections](#remote-connections-in-git) - _connect to remote_
  - [STAGE & COMMIT](#stage-commit-commands) ◦ <br>
  - [MERGE & REBASE](#merge-rebase-commands) ◦ <br>
  - [DIFF & LOGS](#diff-logs-commands) ◦ <br>
@@ -187,10 +187,11 @@ Some common and very useful git commands tp know. Note that in VSCode you can op
 
 <br>
 
-|Info&nbsp;&&nbsp;Status&nbsp;commands&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<a id="info-status-commands" href="#useful-git-commands-m" title="Back to top">↩</a>|
+|Info&nbsp;&&nbsp;Status&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<a id="info-status-commands" href="#useful-git-commands-m" title="Back to top">↩</a>|
 |:--|:--|
 |`git`&nbsp;`--version`| Prints current git version.|
 |`git`&nbsp;`status`| Prints current repo status:<br>Current branch, changes in w-tree/index, errors, conflicts and info.|
+|`git`&nbsp;`config --list`| Prints current configuration info.|
 |`git`&nbsp;`log --graph --oneline -5`| Prints 5 last commits from HEAD down, each commit on each line. Use `--all` instead of `-5` to list all. |
 |`git`&nbsp;`branch -a -vv`| Prints all local and remote-tracking branches with corresponding upstream status.|
 |`git`&nbsp;`remote -v`| Prints all set remote connections: name and url |
@@ -241,7 +242,7 @@ Some common and very useful git commands tp know. Note that in VSCode you can op
 
 <br>
 
-|REMOTE&nbsp;CONNECTIONS&nbsp;COMMANDS<a id="remote-connections-commands" align=left href="#useful-git-commands-m" title="go to top">&nbsp;&nbsp;&nbsp;&nbsp;↩&nbsp;&nbsp;&nbsp;</a>||||
+|Remote&nbsp;connections|<a id="remote-connections-in-git" href="#useful-git-commands-m" title="Back to top">↩</a>|
 |:--|---|---|---|
 |`git`&nbsp;`remote -v`| List all remote connections |||
 |`git`&nbsp;`remote remove <connection-name>`| Delete a  remote connection |||
