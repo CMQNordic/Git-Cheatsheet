@@ -110,7 +110,7 @@ _Good Git tutorials can be found [here](https://www.youtube.com/watch?v=uR6G2v_W
 |:---|
 |Understanding and making use of tracking relationships in Git makes version control a whole lot easier. Very often we work on a local copy of a project that is hosted in a central remote repo. This means that our local branch have a "sibling" branch, a copy of itself, with the same name in the remote repo. This remote branch can be updated by others independently as we commit to our corresponding local branch.<br><br> Very often we want to know how our local branch differ from its "_remote sibling_". We want to know if any commits were made to same branch in remote by other developers while we were working on a local copy. Here is where "tracking" and "upstream" branches described in detail below help us. When a local branch is turned into a [_tracking branch_](#local-branch) then it automatically tracks its [_upstream branch_](#remote-branch) (its "sibling" in remote) through a [_remote-tracking branch_](#local-branch). <br><br>__Local branch__ (local, _i.e. master_) __-->__ __Remote-tracking branch__ (local, _i.e. origin/master_) __-->__ __Upstream branch__ (remote, _i.e. master_)<br><br>|
 
-|<a id="local-branch">Local&nbsp;branch&nbsp;& Tracking&nbsp;branch&nbsp;& Remote&#8209;tracking&nbsp;branch</a><a align=left href="#common-git-expressions">&nbsp;&nbsp;&nbsp;&nbsp;↩&nbsp;&nbsp;&nbsp;</a>| 
+|<a id="remote-and-upstream-branches-in-git">Local&nbsp;branch&nbsp;& Tracking&nbsp;branch&nbsp;& Remote&#8209;tracking&nbsp;branch</a><a align=left href="#common-git-expressions">&nbsp;&nbsp;&nbsp;&nbsp;↩&nbsp;&nbsp;&nbsp;</a>| 
 |:---|
 |There are several types of _local branches_ and it's important to get familiar with the terminology used in order to follow Git documentations.<br><br>__Local branch__ is simply a branch that exists on your local machine, in your local repo and can be named as "master", "dev" or "feature-x-branch".<br><br>__Tracking branch__ is a type of local branch that is connected to and "tracks" its counterpart "_sibling_" in remote. It tracks the other branches updates and compares difference in number of commits between them. Usually connecting a local branch to track its remote "sibling" is called "[_setting upstream_](#upstream) _for a local branch_" and is what makes a simple local branch to become a tracking branch.<br><br> __Remote-tracking branch__ is a special local branch that is in some cases created automatically in the background by Git. Its name always consists of two parts - `<remote-alias>/<remote-connection-name>` for example "origin/master" och "origin-repo-x/feat-x-branch". Its only purpose is to mirror corresponding remote branch that has same name in remote. This local branch is always automatically created or updated in the background whenever any network communication toward corresponding remote branch is made. For example when a push/pull/fetch is performed to a remote branch then corresponding remote-tracking branch is created locally in the background. All existing _remote-tracking branches_ in our local repo can be listed with a `git branch -r` command.<br><br>To list all local "non-tracking branches", "tracking branches" and "remote-tracking branches" run `git branch -a -vv` command. The result can look something like this:<br><br> _* master&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;33f45fe&nbsp;&nbsp;[origin/master: ahead 1, behind 2]&nbsp;&nbsp;Added print.<br>&nbsp;&nbsp;feature-x-branch&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;09c51c6&nbsp;&nbsp;Merge from master branch.<br>&nbsp;&nbsp;remotes/origin/master&nbsp;&nbsp;&nbsp;a9a5bfc&nbsp;&nbsp;Added special character._<br><br>What does above mean?<br>▸ Branch _* master_ - as marked with "*" is our currently checked out branch. It tracks an upstream branch in remote named "master" through its connection to a local "remote-tracking branch" named "origin/master". Due to this we know it is also a tracking branch and simple pull/push without parameters will work here (read more [here](#upstream)). When this "remote-tracking branch" "origin/master" was synched last time then "master" in remote had 1 new commit not included in our local "master" branch, and our local "master" had 2 new commits not included in "remote master".<br>▸ Branch _feature-x-branch_ - is a normal non-tracking local branch with its last commit labeled 09c51c6.<br>▸ Branch _origin/master_ - is a remote-tracking branch that refers and mirrors corresponding upstream branch named "master" in remote.<br><br> |
 
@@ -187,7 +187,7 @@ Some common and very useful git commands tp know. Note that in VSCode you can op
 
 <br>
 
-|Info&nbsp;&&nbsp;Status&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<a id="info-status-commands" href="#useful-git-commands-m" title="Back to top">↩</a>|
+|Info&nbsp;&&nbsp;Status&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<a id="info-status-commands" href="#useful-git-commands-m" title="Back to top">↩</a>|
 |:--|:--|
 |`git`&nbsp;`--version`| Prints current git version.|
 |`git`&nbsp;`status`| Prints current repo status:<br>Current branch, changes in w-tree/index, errors, conflicts and info.|
@@ -200,12 +200,16 @@ Some common and very useful git commands tp know. Note that in VSCode you can op
 
 <br>
 
-|Copy&nbsp;external&nbsp;repo&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<a id="clone-external-repo" href="#useful-git-commands-m" title="Back to top">↩</a>|
+|Creating&nbsp;local&nbsp;repo&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="clone-external-repo" href="#useful-git-commands-m" title="Back to top">↩</a>||
 |:--|---|
-|`git`&nbsp;`clone`&nbsp;`<remote-url>`|Clones remote repo into a newly created directory named same as remote repo and checks it out. A remote connection is created in background pointing out the cloned URL.|
-|`On github ...`|Do create a new empty repo on your github account and save the URL to this new repo.|
-|`git remote set-url <connection-name> <our-remote-url>`|First with `git remote -v` get the name of existing connection (probably _origin_). Change existing remote URL for the newly cloned repo to url of our own created repo.|
-|`git push <remote-connection-name> <branch-to-push>`|Push/upload all copied files to own remote repo.|
+|Copy from existing: | Copy from existing to your local machine
+|`git clone <remote-url>`| Creates new folder in local location named same as remote repo and codownload whole remote repo into this newly created directory. A remote connection is created in background pointing out the cloned URL and can be checked with `git remote -v`.|
+|Link to existing: | Link existing local repo to external empty shell |
+|`git init`| If the local project is brant new it must first be initiated so that .`git` folder is added to its root. |
+|`git remote -v`| check if there exists a connection already (i.e. origin) that we can reuse, then use `git remote set-url` to change the url to point to desired url. If no connection exist then new one must be added. |
+|`git remote add <connection-name> <our-remote-url>` | Adds new remote and sets it url |
+|`git remote set-url <connection-name> <our-remote-url>`| Change URL cor existing connection to URL pointing to desired (empty) remote repo. |
+|`git push -u <remote-connection-name> <branch-to-push>`| Push (upload) all local files to remote repo. The `-u` flag shall be used first time to force git not only to create a remote-tracking branch but also connect an upstream. Read more [here](#remote-and-upstream-branches-in-git)  |
 
 <br>
 
