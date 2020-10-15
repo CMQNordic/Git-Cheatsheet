@@ -200,16 +200,17 @@ Some common and very useful git commands tp know. Note that in VSCode you can op
 
 <br>
 
-|Creating&nbsp;local&nbsp;repo&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="clone-external-repo" href="#useful-git-commands-m" title="Back to top">↩</a>||
+|Create&nbsp;a&nbsp;local&nbsp;repo&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="clone-external-repo" href="#useful-git-commands-m" title="Back to top">↩</a>||
 |:--|---|
-|Copy from existing: | Copy from existing to your local machine
-|`git clone <remote-url>`| Creates new folder in local location named same as remote repo and codownload whole remote repo into this newly created directory. A remote connection is created in background pointing out the cloned URL and can be checked with `git remote -v`.|
-|Link to existing: | Link existing local repo to external empty shell |
+|Copy from existing: | _Copy from existing to your local machine_
+|`git clone`<br>`<remote-url>`| Creates new folder in local location named same as remote repo and codownload whole remote repo into this newly created directory. A remote connection is created in background pointing out the cloned URL and can be checked with `git remote -v`.|
+|Link to existing: | _Link existing local repo to external empty shell_ |
 |`git init`| If the local project is brant new it must first be initiated so that .`git` folder is added to its root. |
 |`git remote -v`| check if there exists a connection already (i.e. origin) that we can reuse, then use `git remote set-url` to change the url to point to desired url. If no connection exist then new one must be added. |
-|`git remote add <connection-name> <our-remote-url>` | Adds new remote and sets it url |
-|`git remote set-url <connection-name> <our-remote-url>`| Change URL cor existing connection to URL pointing to desired (empty) remote repo. |
-|`git push -u <remote-connection-name> <branch-to-push>`| Push (upload) all local files to remote repo. The `-u` flag shall be used first time to force git not only to create a remote-tracking branch but also connect an upstream. Read more [here](#remote-and-upstream-branches-in-git)  |
+|`git remote add`<br>`<connection-name> <our-remote-url>` | Adds new remote and sets it url |
+|`git remote set-url`<br>`<connection-name> <our-remote-url>`| Change URL cor existing connection to URL pointing to desired (empty) remote repo. |
+|`git push -u`<br>`<remote-connection-name> <branch-to-push>`| Push (upload) all local files to remote repo. The `-u` flag shall be used first time to force git not only to create a remote-tracking branch but also connect an upstream. Read more [here](#remote-and-upstream-branches-in-git)  |
+|`git branch -a -vv`| Check that branches exist and that origin in synch with upstream as expected. |
 
 <br>
 
