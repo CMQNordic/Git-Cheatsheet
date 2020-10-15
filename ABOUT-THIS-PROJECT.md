@@ -1,4 +1,4 @@
-# GIT - ReferenceGuide
+# GIT - ReferenceGuide 
 
 ## This projects contains guide and learning content related to: Git
 
